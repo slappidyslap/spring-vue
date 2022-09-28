@@ -12,14 +12,14 @@
                        :username="getUsername"></UploadUserPic>
     </div>
     <div v-else>
-        <h1> User with username <i> {{ getUsername }} </i> was not found </h1>
+        <h1> User with username <em> {{ getUsername }} </em> was not found </h1>
     </div>
 </template>
 
 <script setup>
 import userService from '@/services/user.service';
 import UploadUserPic from '@/components/UploadUserPic.vue';
-import { computed, onMounted, reactive } from 'vue';
+import {computed, onMounted, reactive, ref} from 'vue';
 import { useRoute } from 'vue-router';
 import authService from '@/services/auth.service';
 
@@ -34,24 +34,24 @@ const user = reactive({
     roles: [],
 });
 
-let isUserFound = true;
+const isUserFound = ref(true);
 
 async function getUserDataByUsername() {
     try {
         const userData = await userService.getByUsername(user.username);
-                
+
         user.userId = userData.id;
         user.fullname = userData.fullname;
         user.userPicUrl = userData.userPicUrl;
         user.email = userData.email;
         user.roles = userData.roles;
 
-        isUserFound = true;
+        isUserFound.value = true;
 
     } catch (error) {
 
-        isUserFound = false;
-        
+        isUserFound.value = false;
+
         return Promise.reject(error);
     }
 }
@@ -73,7 +73,7 @@ const isAuthUserEqualsThisUser = computed(() => {
 
     const thisUserUsername = authUserData.username;
 
-    return thisUserUsername == user.username;
+    return thisUserUsername === user.username;
 });
 
 onMounted(() => {

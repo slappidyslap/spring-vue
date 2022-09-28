@@ -5,14 +5,14 @@
                 <label class="btn btn-default p-0">
                     <input type="file"
                            accept="image/*"
-                           ref="fileInput"
-                           @change="selectImage" />
+                           ref="refFileInput"
+                           @change="onSelectImage" />
                 </label>
             </div>
             <div class="col-4">
                 <button class="btn btn-success btn-sm float-right"
                         :disabled="!currentImage"
-                        @click="upload">
+                        @click="uploadUserPic">
                     Upload
                 </button>
             </div>
@@ -45,7 +45,7 @@
 
 <script setup>
 import userService from '@/services/user.service';
-import { ref, defineProps } from 'vue';
+import {ref, defineProps, onMounted, toRaw} from 'vue';
 
 const props = defineProps({
     username: {
@@ -54,21 +54,28 @@ const props = defineProps({
     }
 });
 
-const currentImage = ref(undefined);
-const previewImage = ref(undefined);
+const currentImage = ref(null);
+const previewImage = ref(null);
 const progress = ref(0);
 const message = ref("");
+const refFileInput = ref(null);
+const username = toRaw(props.username);
 const fileInput = ref(null);
-const username = ref(props.username);
 
-function selectImage() {
+function onSelectImage() {
 
-    currentImage.value = fileInput.value.file.files.item(0);
+    currentImage.value = fileInput.value.files.item(0);
+    previewImage.value = URL.createObjectURL(currentImage.value);
     progress.value = 0;
     message.value = "";
+
 }
 
-async function upload() {
+onMounted(() => {
+    fileInput.value = refFileInput.value;
+});
+
+async function uploadUserPic() {
     try {
         progress.value = 0;
     
@@ -80,7 +87,7 @@ async function upload() {
     } catch (error) {
         progress.value = 0;
         message.value = "Could not upload the image! " + error;
-        currentImage.value = undefined;
+        currentImage.value = null;
     }
 }
 </script>
