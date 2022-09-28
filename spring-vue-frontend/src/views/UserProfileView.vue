@@ -12,7 +12,7 @@
                        :username="getUsername"></UploadUserPic>
     </div>
     <div v-else>
-        <h1> User with username <i> {{ getUsername }} </i> was not found </h1>
+        <h1> User with username <em> {{ getUsername }} </em> was not found </h1>
     </div>
 </template>
 

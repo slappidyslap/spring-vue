@@ -7,42 +7,42 @@
                         id="profile-img"
                         src="@/assets/favicon.png"
                         class="profile-img-card"
-                    />
+                        alt="..."/>
                     <Form @submit="onSubmit"
                           :validation-schema="signUpSchema">
                         <div class="form-group mb-3">
                             <label for="username">Username</label>
                             <Field name="username"
                                    type="text"
-                                   class="form-control" />
+                                   class="form-control"/>
                             <ErrorMessage name="username"
-                                          class="error-feedback" />
+                                          class="error-feedback"/>
                         </div>
                         <div class="form-group mb-3">
                             <label for="email">Email</label>
                             <Field name="email"
                                    type="text"
-                                   class="form-control" />
+                                   class="form-control"/>
                             <ErrorMessage name="email"
-                                          class="error-feedback" />
+                                          class="error-feedback"/>
                         </div>
                         <div class="form-group mb-3">
                             <label for="fullname">Fullname</label>
                             <Field name="fullname"
                                    type="text"
-                                   class="form-control" />
+                                   class="form-control"/>
                             <ErrorMessage name="fullname"
-                                          class="error-feedback" />
+                                          class="error-feedback"/>
                         </div>
                         <div class="form-group mb-3">
                             <label for="password">Password</label>
                             <Field name="password"
                                    type="password"
-                                   class="form-control" />
+                                   class="form-control"/>
                             <ErrorMessage name="password"
-                                          class="error-feedback" />
+                                          class="error-feedback"/>
                         </div>
-                        
+
                         <div class="form-group d-flex justify-content-center">
                             <button class="btn btn-success btn-block"
                                     :disabled="isLoading">
@@ -69,8 +69,8 @@
 
 <script setup>
 import * as yup from 'yup';
-import { markRaw, ref } from 'vue';
-import { useStore } from 'vuex';
+import {markRaw, ref} from 'vue';
+import {useStore} from 'vuex';
 
 const store = useStore();
 
@@ -104,10 +104,12 @@ async function onSubmit(signUpData) {
 .card-container {
     padding: 0 50px 30px 50px;
 }
+
 main {
     display: flex;
     justify-content: center;
 }
+
 .body {
     width: 400px;
 }
