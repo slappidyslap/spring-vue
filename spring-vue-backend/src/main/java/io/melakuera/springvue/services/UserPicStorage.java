@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserPicStorage {
 	
-	private final UserService userService;
 	private final UserRepo userRepo;
 
 	@PostConstruct
@@ -50,22 +49,21 @@ public class UserPicStorage {
 		}
 	}
 
-	public void serveUserPic(MultipartFile file, String username) {
+	public void serveUserPic(MultipartFile file, User user) {
 		
 		String uniqueFilename = getUniqueFilename(file);
 		
 		String userPicUrl = createUserPicUrl(uniqueFilename);
 
-		putUserPicUrl(username, userPicUrl);
+		putUserPicUrl(user, userPicUrl);
 
 		transferFile(file, uniqueFilename);
 	}
 
-	private void putUserPicUrl(String username, String userPicUrl) {
-		
-		User foundUser = userService.getByUsername(username);
-		foundUser.setUserPicUrl(userPicUrl);
-		userRepo.save(foundUser);
+	private void putUserPicUrl(User user, String userPicUrl) {
+
+		user.setUserPicUrl(userPicUrl);
+		userRepo.save(user);
 	}
 	
 	private String getUniqueFilename(MultipartFile file) {

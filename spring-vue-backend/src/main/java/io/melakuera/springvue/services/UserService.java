@@ -34,7 +34,8 @@ public class UserService {
 			MultipartFile file, 
 			String username) {
 
-		userPicStorage.serveUserPic(file, username);
+		User foundUser = getByUsername(username);
+		userPicStorage.serveUserPic(file, foundUser);
 
 		return ResponseEntity.ok("success");
 	}
