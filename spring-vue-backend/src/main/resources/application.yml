@@ -33,15 +33,6 @@ server:
     
 app:
 
-  access-token-expiration-ms: '#{1000 * 30}' # 30 секунд
+  access-token-expiration-ms: '#{${ACCESS_TOKEN_EXPIRATION_MS:1000 * 30}}' # 30 секунд
   
-  refresh-token-expiration-ms: '#{1000 * 60}' # 1 минут
-  
-  
-# '#{1000 * 60 * 15}'  15 минут
-
-# '#{1000 * 60 * 60 * 60 * 24 * 15}' # 15 дней
-  
-      
-      
-     
+  refresh-token-expiration-ms: '#{${REFRESH_TOKEN_EXPIRATION_MS:1000 * 60}}' # 1 минут

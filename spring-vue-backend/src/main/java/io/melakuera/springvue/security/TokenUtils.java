@@ -33,13 +33,13 @@ public class TokenUtils {
 	private final RefreshTokenRepo refreshTokenRepo;
 	private final UserService userService;
 	
-	@Value("${app.access-token-expiration-ms}")
+	@Value("${app.access-token-expiration-ms}") // если в переменной среды не задан, то по умолчанию 30 секунд
 	private long accessTokenExpirationMs;
-	@Value("${app.refresh-token-expiration-ms}")
+	@Value("${app.refresh-token-expiration-ms}") // по умолчанию 1 минута
 	private long refreshTokenExpirationMs;
 	@Value("${app.secret-key")
 	private String secretKey;
-	
+
 	private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 	
 	public String generateJwt(String username) {
