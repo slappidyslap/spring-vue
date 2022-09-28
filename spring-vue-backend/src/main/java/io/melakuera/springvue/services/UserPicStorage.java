@@ -28,7 +28,7 @@ public class UserPicStorage {
 		try {
 			Files.createDirectory(Constants.root);
 		} catch (IOException e) {
-			throw new RuntimeException("Could not initialize folder for upload!");
+			throw new UserPicServeException("could not initialize folder for upload");
 		}
 	}
 
@@ -37,7 +37,7 @@ public class UserPicStorage {
 		try {
 			FileSystemUtils.deleteRecursively(Constants.root);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new UserPicServeException("could not delete folder for upload");
 		}
 	}
 
