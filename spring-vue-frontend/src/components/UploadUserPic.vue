@@ -63,7 +63,6 @@ const username = toRaw(props.username);
 const fileInput = ref(null);
 
 function onSelectImage() {
-
     currentImage.value = fileInput.value.files.item(0);
     previewImage.value = URL.createObjectURL(currentImage.value);
     progress.value = 0;
