@@ -59,4 +59,4 @@ pnpm-debug.log*
 # Other
 .metadata
 .sonarlint
-
+spring-vue-backend/uploads/
