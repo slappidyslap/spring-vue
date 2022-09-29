@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-import axios from '@/libs/axios';
+import axios from '@/plugins/axios';
 // import eventBus from "@/common/eventBus";
 import { ref } from 'vue';
 const message = ref('text');

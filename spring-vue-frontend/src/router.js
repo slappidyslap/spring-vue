@@ -20,6 +20,10 @@ const routes = [
     {
         path: '/test-auth',
         component: () => import('@/views/AuthTestView.vue')
+    },
+    {
+        path: '/zamenas',
+        component: () => import('@/views/ZamenaView')
     }
 ];
 

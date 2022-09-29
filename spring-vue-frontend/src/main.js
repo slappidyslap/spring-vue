@@ -4,9 +4,9 @@ import router from './router';
 import store from './store';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FontAwesomeIcon from '@/libs/fontAwesome';
+import FontAwesomeIcon from '@/plugins/fontAwesome';
 import uiComponents from '@/components/ui';
-import interceptors from '@/libs/axios/interceptors';
+import interceptors from '@/plugins/axios/interceptors';
 
 const app = createApp(App);
 

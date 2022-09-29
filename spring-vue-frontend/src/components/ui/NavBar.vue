@@ -21,6 +21,8 @@
                  id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link"
+                       @click="this.$router.push('/zamenas')">Замены</a>
+                    <a class="nav-link"
                        @click="this.$router.push('/test-auth')">Authentication testing </a>
                     <a class="nav-link"
                        @click="this.$router.push('/signup')">Sign Up</a>

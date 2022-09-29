@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import FontAwesomeIcon from '@/libs/fontAwesome';
+import FontAwesomeIcon from '@/plugins/fontAwesome';
 
 export default {
     methods: {
