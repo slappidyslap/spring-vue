@@ -3,18 +3,7 @@ package io.melakuera.springvue.models;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,7 +29,7 @@ public class User {
 	@JsonIgnore
 	private String password;
 	
-	@Column(name = "email", unique = true, nullable = false)
+	@Column(name = "email", unique = true)
 	private String email;
 	
 	@ElementCollection(fetch = FetchType.LAZY)
@@ -51,15 +40,21 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Set<Role> roles = new HashSet<>();
 
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "teacher_id", nullable = false)
+	private Teacher teacher;
+
 	public User(
 			String username, 
 			String password,
-			String email, 
+			String email,
+			Teacher teacher,
 			Set<Role> roles) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.teacher = teacher;
 		this.roles = roles;
 	}
 }

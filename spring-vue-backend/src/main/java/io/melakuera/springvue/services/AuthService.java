@@ -71,6 +71,8 @@ public class AuthService {
 		));
 	}
 	
+
+	/*
 	@Transactional
 	public ResponseEntity<User> signUp(SignUpRequest dto) {
 		
@@ -89,7 +91,7 @@ public class AuthService {
 			
 		return new ResponseEntity<>(newUser, HttpStatus.CREATED);
 	}
-
+	*/
 	@Transactional
 	public ResponseEntity<RefreshTokenResponse> updateRefreshToken(
 			UpdateRefreshTokenRequest dto) {

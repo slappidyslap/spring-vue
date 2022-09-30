@@ -26,11 +26,14 @@ public class AuthController {
 	ResponseEntity<SignInResponse> signIn(@RequestBody SignInRequest dto) {
 		return authService.signIn(dto);
 	}
-	
+
+	// TODO Скорее всего учителям не надо будет зарегистрироваться
+	/*
 	@PostMapping("/sign-up")
 	ResponseEntity<User> signUp(@RequestBody SignUpRequest dto) {
 		return authService.signUp(dto);
 	}
+	*/
 	
 	@PostMapping("/refresh-token")
 	public ResponseEntity<RefreshTokenResponse> updateRefreshToken(
