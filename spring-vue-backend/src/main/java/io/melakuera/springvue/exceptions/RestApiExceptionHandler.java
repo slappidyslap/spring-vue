@@ -21,13 +21,6 @@ public class RestApiExceptionHandler {
 
 		return buildBody(exception, request, HttpStatus.UNAUTHORIZED);
 	}
-
-	@ExceptionHandler(MultipartException.class)
-	public ResponseEntity<Map<String, Object>> handleUploadMultipart(
-			HttpServletRequest request, Exception exception) {
-
-		return buildBody(exception, request, HttpStatus.PAYLOAD_TOO_LARGE);
-	}
 	
 	private ResponseEntity<Map<String, Object>> buildBody(
 			final Exception exception,

@@ -24,12 +24,4 @@ public class UserController {
 	ResponseEntity<User> getByUsername(@PathVariable String username) {
 		return ResponseEntity.ok(userService.getByUsername(username));
 	}
-	
-	@PostMapping("/{username}/user-pic")
-	ResponseEntity<String> updateUserPic(
-			@RequestParam("file") MultipartFile file,
-			@PathVariable String username) {
-		
-		return userService.updateUserPic(file, username);
-	}
 }

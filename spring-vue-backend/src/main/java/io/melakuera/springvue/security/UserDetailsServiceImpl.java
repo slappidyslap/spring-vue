@@ -6,7 +6,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.melakuera.springvue.Constants;
 import io.melakuera.springvue.models.User;
 import io.melakuera.springvue.repositories.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -16,12 +15,15 @@ import lombok.RequiredArgsConstructor;
 public class UserDetailsServiceImpl implements UserDetailsService{
 
 	private final UserRepo userRepo;
-	
+
+	public static final String EMAIL_VALIDATION_REGEX = "^[a-zA-Z0-9_!#$%&'*+/=?'{|} ~^.-]+@[a-zA-Z0-9.-]+$";
+
+
 	@Override
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 
-		if (login.matches(Constants.EMAIL_VALIDATION_REGEX)) {
+		if (login.matches(EMAIL_VALIDATION_REGEX)) {
 			User foundUser = userRepo.findByEmail(login).orElseThrow(() -> {
 				throw new UsernameNotFoundException("User not found with email: " + login);
 			});

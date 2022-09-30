@@ -14,8 +14,7 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
 	private final UserRepo userRepo;
-	private final UserPicStorage userPicStorage;
-	
+
 	public User getByUsername(String username) {
 		return userRepo.findByUsername(username).orElseThrow(() -> {
 			throw new UserNotFoundException(
@@ -28,15 +27,5 @@ public class UserService {
 			throw new UserNotFoundException(
 					"such user by id (%s) not found", userId);
 		});
-	}
-
-	public ResponseEntity<String> updateUserPic(
-			MultipartFile file, 
-			String username) {
-
-		User foundUser = getByUsername(username);
-		userPicStorage.serveUserPic(file, foundUser);
-
-		return ResponseEntity.ok("success");
 	}
 }

@@ -1,0 +1,1 @@
+ALTER TABLE users DROP COLUMN (fullname, user_pic_url);

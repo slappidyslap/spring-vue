@@ -16,12 +16,6 @@ spring:
     hibernate:
       ddl-auto: validate
     database-platform: org.hibernate.dialect.H2Dialect
-      
-  servlet:
-    multipart:
-      enabled: true
-      max-file-size: 500KB
-      max-request-size: 500KB
 
   output:
     ansi:

@@ -82,7 +82,6 @@ public class AuthService {
 		
 		User newUser = new User(
 				dto.getUsername(), 
-				dto.getFullname(), 
 				passwordEncoder.encode(dto.getPassword()),
 				dto.getEmail(),
 				dto.getUsername().equals("eld") ? Set.of(Role.ROLE_USER, Role.ROLE_ADMIN) : Set.of(Role.ROLE_USER));

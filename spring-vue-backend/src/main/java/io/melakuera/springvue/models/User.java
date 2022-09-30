@@ -36,9 +36,6 @@ public class User {
 	@Column(name = "username", unique = true)
 	private String username;
 	
-	@Column(name = "fullname", nullable = false)
-	private String fullname;
-	
 	@Column(name = "password", nullable = false)
 	@JsonIgnore
 	private String password;
@@ -53,19 +50,14 @@ public class User {
 	@Column(name = "role")
 	@Enumerated(EnumType.STRING)
 	private Set<Role> roles = new HashSet<>();
-	
-	@Column(name = "user_pic_url")
-	private String userPicUrl = "";
 
 	public User(
 			String username, 
-			String fullname, 
-			String password, 
+			String password,
 			String email, 
 			Set<Role> roles) {
 		super();
 		this.username = username;
-		this.fullname = fullname;
 		this.password = password;
 		this.email = email;
 		this.roles = roles;

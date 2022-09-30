@@ -12,20 +12,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
-	private final String root = Paths.get("uploads").toAbsolutePath().toString();
-	
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
         registry
         	.addMapping("/**")
         	.allowedOrigins("http://localhost:9000")
         	.allowedMethods("*");
-	}
-	
-	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry
-			.addResourceHandler("uploads/**")
-			.addResourceLocations("file:///" + root + "/");
 	}
 }
