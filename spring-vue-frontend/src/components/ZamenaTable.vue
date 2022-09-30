@@ -151,8 +151,11 @@ function putTimetableData(th, timetableData) {
 }
 
 function getTimetableData(timetableData, color) {
+
     let resultString = "";
-    if (timetableData[color] === null || timetableData[color] === undefined) {
+
+    if (!isExists(timetableData[color])) {
+        // Эти условия нужны, чтобы не было лишник "НЕТ"
         if (isExists(timetableData.white) && !isExists(timetableData.black))
             return "";
         else if (!isExists(timetableData.white) && !isExists(timetableData.black))

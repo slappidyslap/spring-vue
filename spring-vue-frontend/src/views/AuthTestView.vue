@@ -11,6 +11,7 @@
 
 <script setup>
 import axios from '@/plugins/axios';
+// TODO
 // import eventBus from "@/common/eventBus";
 import { ref } from 'vue';
 const message = ref('text');

@@ -43,14 +43,6 @@ class AuthService {
         }
     }
 
-    getAuthorizationHeader() {
-        const authUserData = localStorage.getItem('authUserData');
-
-        console.log(authUserData);
-
-        return `Bearer ${authUserData.accessToken}`;
-    }
-
     getRefreshToken() {
         const authUserData = JSON.parse(localStorage.getItem('authUserData'));
         
@@ -73,12 +65,6 @@ class AuthService {
 
     getAuthUserData() {
         return JSON.parse(localStorage.getItem('authUserData'));
-    }
-
-    setAuthUserDate(newAuthUserData) {
-        console.log(newAuthUserData);
-
-        localStorage.setItem('getAuthUserDate', newAuthUserData);
     }
 
     removeAuthUserData() {

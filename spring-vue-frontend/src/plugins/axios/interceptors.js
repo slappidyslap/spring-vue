@@ -14,9 +14,6 @@ const axiosRefreshTokenInstance = axios.create({
     }
 });
 
-// async function updateAccessTokenByRefreshToken(store) {
-// }
-
 export default function interceptors(store) {
     // Задает access token в хедер Authorization
     axiosInstance.interceptors.request.use(
