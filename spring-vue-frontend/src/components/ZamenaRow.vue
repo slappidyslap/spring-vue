@@ -1,45 +1,43 @@
 <template>
-    <th scope="row"
-        time>
-        <slot></slot>
-    </th>
-    <th scope="row">
-        <PopUp>
-            <ZamenaForm/>
-        </PopUp>
-    </th>
-    <th scope="row">
-        <PopUp>
-            <ZamenaForm/>
-        </PopUp>
-    </th>
-    <th scope="row">
-        <PopUp>
-            <ZamenaForm/>
-        </PopUp>
-    </th>
-    <th scope="row">
-        <PopUp>
-            <ZamenaForm/>
-        </PopUp>
-    </th>
-    <th scope="row">
-        <PopUp>
-            <ZamenaForm/>
-        </PopUp>
-    </th>
-    <th scope="row">
-        <PopUp>
-            <ZamenaForm/>
-        </PopUp>
-    </th>
+    <tr>
+        <th scope="row"
+            time>
+            <slot></slot>
+        </th>
+        <th scope="row">
+            <PopUpLink/>
+        </th>
+        <th scope="row">
+            <PopUpLink/>
+        </th>
+        <th scope="row">
+            <PopUpLink/>
+        </th>
+        <th scope="row">
+            <PopUpLink/>
+        </th>
+        <th scope="row">
+            <PopUpLink/>
+        </th>
+        <th scope="row">
+            <PopUpLink/>
+        </th>
+    </tr>
 </template>
 
 <script setup>
-import PopUp from "@/components/PopUp.vue";
-import ZamenaForm from "./ZamenaForm.vue";
+import PopUpLink from "@/components/PopUpLink.vue";
 </script>
 
 <style lang="scss" scoped>
+
+th:not([time]) {
+    position: relative;
+    font-weight: normal;
+}
+
+th[time] {
+    font-weight: bolder;
+}
 
 </style>
