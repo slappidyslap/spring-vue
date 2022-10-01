@@ -9,7 +9,7 @@
         <col width="15.5%">
         <thead>
             <tr>
-                <th scope="col">Время</th>
+                <th scope="col"></th>
                 <th scope="col">Понедельник</th>
                 <th scope="col">Вторник</th>
                 <th scope="col">Среда</th>

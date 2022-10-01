@@ -22,7 +22,6 @@
 
 a {
     font-size: 25px;
-    // padding: 0 50%;
 }
 
 </style>

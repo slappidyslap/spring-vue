@@ -81,10 +81,12 @@ function getTimetableData(timetableData, color) {
         const result =
             `
             <div>
-                ${data.subject} ${data.to !== "all" ? data.to : ""} ${data.audience}
-            </div>
-            <div>
-                ${data.teacher}
+                <div>
+                    ${data.subject} ${data.to !== "all" ? data.to : ""} ${data.audience}
+                </div>
+                <div>
+                    ${data.teacher}
+                </div>
             </div>
             `;
         resultString = resultString.concat(result);
