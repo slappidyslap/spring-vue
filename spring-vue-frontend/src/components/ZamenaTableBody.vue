@@ -39,14 +39,13 @@ function fillTable() {
     const contentTableChildren = Array.from(tableBody.value.children);
     for (let dayOfWeekIdx = 0; dayOfWeekIdx < 6 - 1; dayOfWeekIdx++) {
         for (let lessonIdx = 0; lessonIdx < 8 - 1; lessonIdx++) {
-
             const th = contentTableChildren[lessonIdx].children[dayOfWeekIdx + 1]; // Плюсуем чтобы сместить направо, т.к. в первом столбце время
             const timetableData = timetable[dayOfWeekIdx][lessonIdx];
 
-            if (isExists(timetableData)) {
+            if (isTimeTableNotEmpty(timetableData)) {
                 putTimetableData(th, timetableData);
             } else {
-                break;
+                continue;
             }
         }
     }
@@ -68,11 +67,11 @@ function getTimetableData(timetableData, color) {
 
     let resultString = "";
 
-    if (!isExists(timetableData[color])) {
+    if (!timetableData[color]) {
         // Эти условия нужны, чтобы не было лишник "НЕТ"
-        if (isExists(timetableData.white) && !isExists(timetableData.black))
+        if (timetableData.white && !timetableData.black)
             return "";
-        else if (!isExists(timetableData.white) && !isExists(timetableData.black))
+        else if (!timetableData.white && !timetableData.black)
             return "";
         return "НЕТ";
     }
@@ -94,8 +93,8 @@ function getTimetableData(timetableData, color) {
     return resultString;
 }
 
-function isExists(object) {
-    return Boolean(object);
+function isTimeTableNotEmpty(timeTable) {
+    return timeTable && (timeTable?.white || timeTable?.black );
 }
 </script>
 

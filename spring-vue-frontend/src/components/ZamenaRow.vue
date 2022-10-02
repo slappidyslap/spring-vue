@@ -5,22 +5,22 @@
             <slot></slot>
         </th>
         <td scope="row">
-            <PopUpLink @click="log($event)"/>
+            <PopUpLink @click="onClickPopupLink($event)"/>
         </td>
         <td scope="row">
-            <PopUpLink @click="log($event)"/>
+            <PopUpLink @click="onClickPopupLink($event)"/>
         </td>
         <td scope="row">
-            <PopUpLink @click="log($event)"/>
+            <PopUpLink @click="onClickPopupLink($event)"/>
         </td>
         <td scope="row">
-            <PopUpLink @click="log($event)"/>
+            <PopUpLink @click="onClickPopupLink($event)"/>
         </td>
         <td scope="row">
-            <PopUpLink @click="log($event)"/>
+            <PopUpLink @click="onClickPopupLink($event)"/>
         </td>
         <td scope="row">
-            <PopUpLink @click="log($event)"/>
+            <PopUpLink @click="onClickPopupLink($event)"/>
         </td>
     </tr>
 </template>
@@ -28,7 +28,7 @@
 <script setup>
 import PopUpLink from "@/components/PopUpLink.vue";
 
-function log(event) {
+function onClickPopupLink(event) {
 
     const response = {};
 
@@ -36,47 +36,47 @@ function log(event) {
     const thElementChildren = thElement.children;
 
     response.time = thElement.parentElement.children[0].innerText.replace(" ", " - ");
-    response.dayOfWeek = getDayOfWeek(thElement.cellIndex);
+    response.dayOfWeekIndex = thElement.cellIndex;
 
-    if (thElementChildren.length < 1) {  // Если правда, то это значит, что в ячейке нету урока
-        return; // И в попапе не с чем сравнивать
+    if (thElementChildren.length === 1) {  // Если правда, то это значит, что в ячейке нету урока (там только ссылка на попап)
+        // И в попапе не с чем сравнивать
+        console.log(response);
+
+    } else {
+        // Уроки могут быть в числителе (белый) или в знаменателе (черный)
+        const whiteAndBlackLessons = Array.from(thElementChildren[0].children);
+
+        const responseLessons = {};
+
+        // TODO Либо удалять пустые массивы, либо нет
+        responseLessons.white = getFormattedLessonsByColor(whiteAndBlackLessons, "white");
+        responseLessons.black = getFormattedLessonsByColor(whiteAndBlackLessons, "black");
+
+        response.lessons = responseLessons;
+
+        console.log(response);
     }
-
-    // Уроки могут быть в числителе (белый) или в знаменателе (черный)
-    const whiteAndBlackLessons = Array.from(thElementChildren[0].children);
-
-    // В один момент времени может быть так, что первой подгруппе другой урок и второй другой
-
-    const responseLessons = {};
-
-    // TODO Либо удалять пустые массивы, либо нет
-    const whiteLessons = whiteAndBlackLessons[0];
-    let arrForWhiteLessons = [];
-    Array.from(whiteLessons.children).forEach(lessons => {
-        const firstChild = lessons.children[0].outerText;
-        const secondChild = lessons.children[1].outerText;
-        if (firstChild && secondChild) {
-            arrForWhiteLessons.push(`${firstChild} ${secondChild}`);
-        }
-    });
-    responseLessons.white = arrForWhiteLessons;
-
-    const blackLesson = whiteAndBlackLessons[1];
-    let arrForBlackLessons = [];
-    Array.from(blackLesson.children).forEach(lessons => {
-        const firstChild = lessons.children[0].outerText;
-        const secondChild = lessons.children[1].outerText;
-        if (firstChild && secondChild) {
-            arrForBlackLessons.push(`${firstChild} ${secondChild}`);
-        }
-    });
-    responseLessons.black = arrForBlackLessons;
-
-    response.lessons = responseLessons;
-
-    console.log(response);
 }
 
+// В один момент времени может быть так, что первой подгруппе другой урок и второй другой (поэтому цикл, чтоб всех перебрать)
+function getFormattedLessonsByColor(whiteAndBlackLessons, color) {
+
+    let lessons;
+
+    if (color === "white") lessons = whiteAndBlackLessons[0];
+    else if (color === "black") lessons = whiteAndBlackLessons[1];
+
+    const arrOfFormattedLessons = [];
+    Array.from(lessons.children).forEach(lessons => {
+        const firstChild = lessons.children[0].outerText;
+        const secondChild = lessons.children[1].outerText;
+        if (firstChild && secondChild) {
+            arrOfFormattedLessons.push(`${firstChild} ${secondChild}`);
+        }
+    });
+    return arrOfFormattedLessons;
+}
+/*
 function getDayOfWeek(num) {
     if (num === 1) return "Понедельник";
     else if (num === 2) return "Вторник";
@@ -85,6 +85,7 @@ function getDayOfWeek(num) {
     else if (num === 5) return "Пятница";
     else if (num === 6) return "Суббота";
 }
+*/
 </script>
 
 <style lang="scss" scoped>
