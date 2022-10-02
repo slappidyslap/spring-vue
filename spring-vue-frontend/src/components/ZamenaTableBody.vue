@@ -1,25 +1,26 @@
 <template>
     <tbody ref="tableBody">
-        <ZamenaRow> 07:30 09:00 </ZamenaRow>
-        <ZamenaRow> 09:05 10:35 </ZamenaRow>
-        <ZamenaRow> 11.00 12.30 </ZamenaRow>
-        <ZamenaRow> 12.35 14.05 </ZamenaRow>
-        <ZamenaRow> 14.10 15.40 </ZamenaRow>
-        <ZamenaRow> 15.45 17.15 </ZamenaRow>
-        <ZamenaRow> 17.20 18.50 </ZamenaRow>
-        <ZamenaRow> 18.55 20.25 </ZamenaRow>
+        <ZamenaRow @clickPopupLink="onClickPopupLink"> 07:30 09:00 </ZamenaRow>
+        <ZamenaRow @clickPopupLink="onClickPopupLink"> 09:05 10:35 </ZamenaRow>
+        <ZamenaRow @clickPopupLink="onClickPopupLink"> 11.00 12.30 </ZamenaRow>
+        <ZamenaRow @clickPopupLink="onClickPopupLink"> 12.35 14.05 </ZamenaRow>
+        <ZamenaRow @clickPopupLink="onClickPopupLink"> 14.10 15.40 </ZamenaRow>
+        <ZamenaRow @clickPopupLink="onClickPopupLink"> 15.45 17.15 </ZamenaRow>
+        <ZamenaRow @clickPopupLink="onClickPopupLink"> 17.20 18.50 </ZamenaRow>
+        <ZamenaRow @clickPopupLink="onClickPopupLink"> 18.55 20.25 </ZamenaRow>
     </tbody>
-    <PopUp></PopUp>
+    <PopUp :cell-data="cellDataForForm"></PopUp>
 </template>
 
 <script setup>
 import ZamenaRow from "./ZamenaRow.vue";
 import PopUp from "./PopUp.vue";
-import {defineProps, onMounted, ref, toRaw} from "vue";
+import {onMounted, ref, toRaw} from "vue";
 import zamenaService from "@/services/zamena.service";
 
 const tableBody = ref(null);
 
+// eslint-disable-next-line no-undef
 const props = defineProps({
     group: {
         type: String,
@@ -27,6 +28,12 @@ const props = defineProps({
     }
 });
 const group = toRaw(props.group).replace('_', ' ');
+
+const cellDataForForm = ref(null);
+
+function onClickPopupLink(cellData) {
+    cellDataForForm.value = cellData;
+}
 
 onMounted(() => {
     fillTable();

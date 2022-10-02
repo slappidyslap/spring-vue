@@ -28,19 +28,22 @@
 <script setup>
 import PopUpLink from "@/components/PopUpLink.vue";
 
+// eslint-disable-next-line no-undef
+const emit = defineEmits(['clickPopupLink']);
+
 function onClickPopupLink(event) {
 
-    const response = {};
+    const cellData = {};
 
     const thElement = event.target.parentElement.parentElement.parentElement;
     const thElementChildren = thElement.children;
 
-    response.time = thElement.parentElement.children[0].innerText.replace(" ", " - ");
-    response.dayOfWeekIndex = thElement.cellIndex;
+    cellData.time = thElement.parentElement.children[0].innerText.replace(" ", " - ");
+    cellData.dayOfWeekIndex = thElement.cellIndex;
 
     if (thElementChildren.length === 1) {  // Если правда, то это значит, что в ячейке нету урока (там только ссылка на попап)
         // И в попапе не с чем сравнивать
-        console.log(response);
+        emit('clickPopupLink', cellData);
 
     } else {
         // Уроки могут быть в числителе (белый) или в знаменателе (черный)
@@ -52,9 +55,9 @@ function onClickPopupLink(event) {
         responseLessons.white = getFormattedLessonsByColor(whiteAndBlackLessons, "white");
         responseLessons.black = getFormattedLessonsByColor(whiteAndBlackLessons, "black");
 
-        response.lessons = responseLessons;
+        cellData.lessons = responseLessons;
 
-        console.log(response);
+        emit('clickPopupLink', cellData);
     }
 }
 
@@ -76,27 +79,13 @@ function getFormattedLessonsByColor(whiteAndBlackLessons, color) {
     });
     return arrOfFormattedLessons;
 }
-/*
-function getDayOfWeek(num) {
-    if (num === 1) return "Понедельник";
-    else if (num === 2) return "Вторник";
-    else if (num === 3) return "Среда";
-    else if (num === 4) return "Четверг";
-    else if (num === 5) return "Пятница";
-    else if (num === 6) return "Суббота";
-}
-*/
 </script>
 
 <style lang="scss" scoped>
 
 td {
     position: relative;
-    font-weight: lighter;
-}
-
-td {
-    font-weight: bolder;
+    font-weight: normal;
 }
 
 </style>
