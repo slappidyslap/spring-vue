@@ -4,7 +4,7 @@
          tabindex="-1"
          aria-labelledby="label"
          aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"
@@ -18,8 +18,11 @@
                 </div>
                 <div class="modal-body">
                     <div>
+                        <СomparingLessons :lessons="lessons"/>
                     </div>
-                    <ZamenaForm></ZamenaForm>
+                    <div>
+                        <ZamenaForm/>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button"
@@ -34,6 +37,7 @@
 
 <script setup>
 import ZamenaForm from "./ZamenaForm";
+import СomparingLessons from "./СomparingLessons.vue";
 import {computed, ref, watch} from "vue";
 
 // eslint-disable-next-line no-undef
@@ -43,20 +47,20 @@ const props = defineProps({
     }
 });
 
-// const watchingCellData = ref(props.cellData);
-
-const time = ref(null);
-const dayOfWeek = ref(null);
+const time = ref("");
+const dayOfWeek = ref(0);
 const lessons = ref([]);
+const group = ref("");
 
 watch(() => props.cellData, (cellData) => {
     time.value = cellData.time;
     dayOfWeek.value = getFormattedDayOfWeekByIndex(cellData.dayOfWeekIndex);
     lessons.value = cellData.lessons;
+    group.value = cellData.group;
 });
 
 const getTitle = computed(() => {
-    return `Замена ${dayOfWeek.value} ${time.value} для ПКС 1-21`;
+    return `Замена ${dayOfWeek.value} ${time.value} для ${group.value}`;
 });
 
 function getFormattedDayOfWeekByIndex(idx) {
@@ -79,6 +83,10 @@ div.modal-content {
 
 h5.modal-title {
     font-size: 1.1em;
+}
+
+div.modal-body {
+    display: flex;
 }
 
 </style>

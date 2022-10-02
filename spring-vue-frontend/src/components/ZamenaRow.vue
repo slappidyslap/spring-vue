@@ -40,6 +40,7 @@ function onClickPopupLink(event) {
 
     cellData.time = thElement.parentElement.children[0].innerText.replace(" ", " - ");
     cellData.dayOfWeekIndex = thElement.cellIndex;
+    cellData.group = thElement.parentElement.parentElement.parentElement.parentElement.parentElement.id.replace("_", " "); // а так нормально?
 
     if (thElementChildren.length === 1) {  // Если правда, то это значит, что в ячейке нету урока (там только ссылка на попап)
         // И в попапе не с чем сравнивать
