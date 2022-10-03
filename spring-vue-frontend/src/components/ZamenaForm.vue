@@ -67,7 +67,7 @@ const isSecondCheckBox = ref(false);
 
 // TODO Получить с vuex
 const getFullName = computed(() => {
-    return "Бубнева Вера Борисовна";
+    return "Бубнева В.Б";
 });
 
 const getTeachingSubject = computed(() => {

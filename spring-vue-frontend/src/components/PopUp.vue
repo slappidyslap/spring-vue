@@ -4,7 +4,7 @@
          tabindex="-1"
          aria-labelledby="label"
          aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"
@@ -17,8 +17,9 @@
                             aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div>
-                        <СomparingLessons :lessons="lessons"/>
+                    <!-- TODO -->
+                    <div ref="div">
+                        <ComparingLessons :lessons="lessons"/>
                     </div>
                     <div>
                         <ZamenaForm/>
@@ -37,7 +38,7 @@
 
 <script setup>
 import ZamenaForm from "./ZamenaForm";
-import СomparingLessons from "./СomparingLessons.vue";
+import ComparingLessons from "@/components/ComparingLessons";
 import {computed, ref, watch} from "vue";
 
 // eslint-disable-next-line no-undef
@@ -49,15 +50,26 @@ const props = defineProps({
 
 const time = ref("");
 const dayOfWeek = ref(0);
-const lessons = ref([]);
+const lessons = ref({});
 const group = ref("");
 
+const div = ref(null);
+
 watch(() => props.cellData, (cellData) => {
-    time.value = cellData.time;
-    dayOfWeek.value = getFormattedDayOfWeekByIndex(cellData.dayOfWeekIndex);
-    lessons.value = cellData.lessons;
-    group.value = cellData.group;
+    if (cellData) {
+        time.value = cellData.time;
+        dayOfWeek.value = getFormattedDayOfWeekByIndex(cellData.dayOfWeekIndex);
+        group.value = cellData.group;
+        if (cellData.lessons) lessons.value = cellData.lessons;
+        else lessons.value = { none: true }; // Если нажали на ячейку где нет пар, то даем знать, что не с чем сравнивать
+    }
 });
+
+// watch(() =>  lessons, (newValue) => {
+//     if (newValue.value.none) {
+//         console.log(div);
+//     }
+// });
 
 const getTitle = computed(() => {
     return `Замена ${dayOfWeek.value} ${time.value} для ${group.value}`;
@@ -87,6 +99,7 @@ h5.modal-title {
 
 div.modal-body {
     display: flex;
+    justify-content: space-between;
 }
 
 </style>
