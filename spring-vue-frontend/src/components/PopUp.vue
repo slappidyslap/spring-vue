@@ -18,11 +18,15 @@
                 </div>
                 <div class="modal-body">
                     <!-- TODO -->
-                    <div ref="div">
-                        <ComparingLessons :lessons="lessons"/>
-                    </div>
                     <div>
                         <ZamenaForm/>
+                    </div>
+                    <div>
+                        <img src="@/assets/rightarrow_121279.svg"
+                             alt="...">
+                    </div>
+                    <div>
+                        <ComparingLessons :lessons="lessons"/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -53,8 +57,6 @@ const dayOfWeek = ref(0);
 const lessons = ref({});
 const group = ref("");
 
-const div = ref(null);
-
 watch(() => props.cellData, (cellData) => {
     if (cellData) {
         time.value = cellData.time;
@@ -64,12 +66,6 @@ watch(() => props.cellData, (cellData) => {
         else lessons.value = { none: true }; // Если нажали на ячейку где нет пар, то даем знать, что не с чем сравнивать
     }
 });
-
-// watch(() =>  lessons, (newValue) => {
-//     if (newValue.value.none) {
-//         console.log(div);
-//     }
-// });
 
 const getTitle = computed(() => {
     return `Замена ${dayOfWeek.value} ${time.value} для ${group.value}`;

@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isLessonsExist">
+    <div>
         <Form>
             <div class="input-group input-group-sm mb-3">
                 <input type="text"
@@ -58,9 +58,6 @@
             </div>
         </Form>
     </div>
-    <div v-else>
-        <span class="span">Тут свободно!</span>
-    </div>
 </template>
 
 <script setup>
@@ -73,9 +70,6 @@ const props = defineProps({
     }
 });
 
-// eslint-disable-next-line no-unused-vars
-const lessons = ref(null);
-const isLessonsExist = ref(false);
 const selectedLesson = ref("");
 const formattedLessons = ref({});
 const subject = ref("");
@@ -85,16 +79,11 @@ const teacherFullName = ref("");
 
 
 watch(() => props.lessons, (lessons) => {
-    if (lessons.none !== true) {
-        isLessonsExist.value = true;
-
+    if (lessons) {
         formattedLessons.value = {
             white: [...getFormattedLessonsByColor(lessons, "white")],
             black: [...getFormattedLessonsByColor(lessons, "black")]
         };
-    }
-    else {
-        isLessonsExist.value = false;
     }
 
 });
