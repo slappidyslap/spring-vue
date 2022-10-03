@@ -47,6 +47,7 @@ public class WebSecurityConfig {
 					.antMatchers("/api/test-auth/user").hasAuthority("ROLE_USER")
 					.antMatchers("/api/test-auth/anon").permitAll()
 					.antMatchers("/api/users/*").permitAll()
+					.antMatchers("/ws/**").permitAll()
 				.anyRequest()
 					.authenticated()
 				.and()

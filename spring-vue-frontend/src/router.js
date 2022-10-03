@@ -32,7 +32,7 @@ const router = createRouter({
     routes
 });
 
-const publicViews = ['/login', '/', '/signup', '/test-auth', '/eld', '/tom', '/bob'];
+const publicViews = ['/login', '/', '/signup', '/test-auth', '/eld', '/tom', '/bob', '/zamenas'];
 
 router.beforeEach((to, from, next) => {
 
